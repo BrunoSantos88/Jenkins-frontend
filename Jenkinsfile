@@ -13,6 +13,14 @@ pipeline {
 
   stages{
 
+    stage('Clone repository') { 
+steps { 
+script{
+checkout scm
+}
+}
+}
+
     stage('SonarCloud-GateCode-Quality') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=SONNAR_CLOUD'
