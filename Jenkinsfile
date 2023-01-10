@@ -20,13 +20,6 @@ checkout scm
 }
 }
 }
-
-    stage('SonarCloud-GateCode-Quality') {
-            steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=247b1dad18b8aae5c645708c4dad4a3672f0adeb'
-			}
-        } 
-        
     stage('Synk-GateSonar-Security') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
