@@ -15,7 +15,7 @@ pipeline {
 
     stage('SonarCloud-GateCode-Quality') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=c53123a613038f737e70be1e44643de7460ce9d8'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=SONNAR_CLOUD'
 			}
         } 
     stage('Synk-GateSonar-Security') {
