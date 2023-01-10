@@ -5,7 +5,7 @@ pipeline {
     }
 
     environment {
-    registry = "brunosantos88/awsfrontend"
+    registry = "brunosantos88/awsfronten"
     registryCredential = 'dockerlogin'
     dockerImage = ''
   }
