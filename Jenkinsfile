@@ -23,7 +23,7 @@ checkout scm
 
     stage('SonarCloud-GateCode-Quality') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f8240d7caaf43a5abea893e3c0960b481f5ad3a6'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos88 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f8240d7caaf43a5abea893e3c0960b481f5ad3a6'
 			}
         } 
         
