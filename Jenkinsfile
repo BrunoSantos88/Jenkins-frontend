@@ -20,7 +20,6 @@ checkout scm
 }
 }
 }
-
     stage('Synk-GateSonar-Security') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
@@ -28,29 +27,16 @@ checkout scm
 				}
 			}
   }
-  
 
-  '''
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+      stage('Kubernetes Apply') {
+          steps {
+          sh 'terraform apply -auto-approve'
+          sh 'terraform output kubeconfig > ./kubeconfig'
+          sh 'terraform output config_map_aws_auth > ./config_map_aws_auth.yaml'
+          sh 'export KUBECONFIG=./kubeconfig'
+            }
         }
-      }
-    }
-
-    '''
-
-    stage('Deploy Image') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
         }
-      }
-    }
-
   }
-}
+
    
