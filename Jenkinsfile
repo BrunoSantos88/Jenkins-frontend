@@ -28,15 +28,16 @@ checkout scm
 			}
   }
 
-      stage('Kubernetes Apply') {
-          steps {
-          sh 'terraform apply -auto-approve'
-          sh 'terraform output kubeconfig > ./kubeconfig'
-          sh 'terraform output config_map_aws_auth > ./config_map_aws_auth.yaml'
-          sh 'export KUBECONFIG=./kubeconfig'
+      stage('Kubernetes Deployment of ASG Bugg Web Application') {
+	   steps {
+	      withKubeConfig([credentialsId: 'kubelogin']) {
+		  sh('kubectl delete all --all -n devsecops')
+      sh('kubectl create namespaces devsecops ')
+		  sh ('kubectl apply -f deployment.yaml --namespace=devsecops')
             }
         }
         }
   }
+}
 
    
