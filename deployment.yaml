@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: asgbuggy
-        image: brunosantos88/awsfrontend:5
+        image: brunosantos88/awsfrontend:6
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
