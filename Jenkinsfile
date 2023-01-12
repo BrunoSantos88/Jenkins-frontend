@@ -24,7 +24,7 @@ stage('SonarQube analysis') {
 
 		}
 
-  stage('Email Sucess')
+    stage('Email Sucess')
 		{
 
 			emailext (
@@ -35,10 +35,7 @@ stage('SonarQube analysis') {
 		}
 
 
-
-	}catch (e) {
-
-		stage('Email Failed')
+	stage('Email Failed')
 		{
 
 			emailext (
@@ -47,9 +44,6 @@ stage('SonarQube analysis') {
 				body: "Something is wrong with ${env.BUILD_URL}"
 				)	 
 		}
-
-
-		throw e
 	}
 
 	
