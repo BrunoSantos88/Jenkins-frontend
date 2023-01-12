@@ -23,27 +23,6 @@ stage('SonarQube analysis') {
 			}
 
 		}
-
-    stage('Email Sucess')
-		{
-
-			emailext (
-				to: 'brunosantosc1@gmail.com',
-				subject: "Sucess Pipeline: ${currentBuild.fullDisplayName}",
-				body: "Sucess with ${env.BUILD_URL}"
-				)	 
-		}
-
-
-	stage('Email Failed')
-		{
-
-			emailext (
-				to: 'brunosantosc1@gmail.com',
-				subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-				body: "Something is wrong with ${env.BUILD_URL}"
-				)	 
-		}
 	}
 
 	
