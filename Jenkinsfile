@@ -18,7 +18,7 @@ stage('SonarQube analysis') {
 
 			withSonarQubeEnv('sonarqube') {
 
-				sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=ef814cbc7a3bebcd87e212e7638a2bd75e41bb62'
+				sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.host.url=http://141.148.3.32:9000 -Dsonar.login=hgcloGyvmzcIYIT6aC3i1HW6Q1HKvFERIzf6rr0bN74='
 
 			}
 
@@ -27,7 +27,6 @@ stage('SonarQube analysis') {
 
 	
 }
-
 
 
 
