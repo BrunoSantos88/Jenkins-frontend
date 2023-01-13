@@ -3,9 +3,9 @@ pipeline {
   tools { 
         maven 'Maven 3.5.2'  
     }
-  
+   stages{
 
-	stage('RunSCAAnalysisUsingSnyk') {
+    stage('RunSCAAnalysisUsingSnyk') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:test -fn'
@@ -34,6 +34,7 @@ pipeline {
     	}
 	    
   }
+}
 
 
    
