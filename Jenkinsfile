@@ -19,11 +19,13 @@ pipeline {
             }
         }
         
-        stage('Cloning Git') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/BrunoSantos88/Jenkins-frontend.git']]])     
+        stage('Clone repository') { 
+      steps { 
+        script{
+          checkout scm
             }
-        }
+             } 
+    }
   
     // Building Docker images
     stage('Building image') {
