@@ -39,7 +39,7 @@ stage('Synk-GateSonar-Security') {
   }
 
 ///DockerProcesso
-stage('Build') { 
+stage('Socker Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin88", url: ""]) {
                  script{
@@ -49,7 +49,7 @@ stage('Build') {
             }
     }
 
-stage('Push') {
+stage('Docker Push') {
             steps {
                 script{
                     docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
@@ -58,8 +58,35 @@ stage('Push') {
                 }
             }
     	}
+
+stage('Slack Notification(Dockerizaçao)') {
+    steps {
+      slackSend message: 'Processo de Criar uma Release de imagem do Docker foi efetuado com sucesso!'
+
+}
+}
 	    
   }
+
+
+// Email Notification
+post {
+        always {
+            echo "Notifying build result by email"
+        }
+success {
+            mail to: 'infratidevops@gmail.com',
+                 subject: "SUCCESS: ${currentBuild.fullDisplayName}",
+                 body: "Pipeline passou, Efetou com Sucesso"
+
+        }
+failure {
+           mail to: 'infratidevops@gmail.com',
+                subject:"FAILURE: ${currentBuild.fullDisplayName}",
+                body: "Pipeline Falhou , verificar os parametros corretos!"
+
+        }
+      }
 }
 
 
