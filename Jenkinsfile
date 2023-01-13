@@ -45,6 +45,13 @@ pipeline {
 			}
   }
 
+  stage('Slack Notification(Dockerization)') {
+    steps {
+      slackSend message: 'Arquivos estão compactados no docker!'
+
+}
+}
+
   stage('Docker Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
