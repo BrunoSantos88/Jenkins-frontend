@@ -61,7 +61,7 @@ stage('Docker Push') {
 
 stage('Slack Notification(Docker)') {
     steps {
-      slackSend message: 'Processo de Criar uma Release de imagem do Docker foi efetuado com sucesso!'
+      slackSend message: 'Processo de criar imagem de Release do frontend no Docker, foi efetuado com sucesso!'
 
 }
 }
