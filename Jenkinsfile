@@ -1,10 +1,6 @@
 pipeline {
   agent any
-
-  tools { 
-        ///depentencias 
-        maven 'Maven 3.6.3' 
-    }
+  
 
 // Stages.
   stages {   
