@@ -22,6 +22,7 @@ stage('Clone repository') {
             }
              } 
     }
+
 stage('Slack Notification(test unit code and vulnerability)') {
     steps {
       slackSend message: 'Pipeline está no estagio de teste no codigo. O Processo será realiazado no Quality Gate, são teste de Sonar e Synk, ambos vão verificar "bugs e vulnerabilidade" em nosso codigo!'
@@ -65,8 +66,6 @@ stage('Slack Notification(Docker)') {
 
 }
 }
-	    
-  }
 
 stage('Kubernetes Deployment') {
 	   steps {
@@ -85,7 +84,7 @@ stage('Slack Notification(EKS)') {
 }
 }
 	    
-  }
+
 
 
 // Email Notification
@@ -106,7 +105,8 @@ failure {
 
         }
       }
+
+
 }
-
-
    
+}
