@@ -67,10 +67,14 @@ stage('Slack Notification(Docker)') {
 }
 }
 
-stage("kubernetes deployment"){
-        sh 'kubectl apply -f deployment.yaml'
-    }
-} 
+stage('Kubernetes Deployment') {
+	   steps {
+	      withKubeConfig([credentialsId: 'kubelogin']) {
+		  sh('kubectl delete all --all -n devsecops')
+		  sh ('kubectl apply -f deployment.yaml --namespace=devsecops')
+		}
+	      }
+   	}
 
 
 stage('Slack Notification(EKS)') {
