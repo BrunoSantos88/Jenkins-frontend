@@ -27,9 +27,9 @@ stage('Synk-GateSonar-Security') {
 ///DockerProcesso
 
 ///DockerProcesso
-stage('Socker Build') { 
+stage('docker Build') { 
             steps { 
-               withDockerRegistry([credentialsId: "dockerlogin88", url: ""]) {
+               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
                  app =  docker.build("frontend")
                  }
