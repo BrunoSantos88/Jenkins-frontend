@@ -68,7 +68,6 @@ stage('Slack Notification(Docker)') {
 	    
   }
 
-
 stage('Kubernetes Deployment') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
