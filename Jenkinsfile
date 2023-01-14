@@ -67,13 +67,10 @@ stage('Slack Notification(Docker)') {
 }
 }
 
-stage('Kubernetes Deployment') {
-	   steps {
-	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl apply -f deployment.yaml')
-		}
-	      }
-   	}
+stage("kubernetes deployment"){
+        sh 'kubectl apply -f deployment.yaml'
+    }
+} 
 
 
 stage('Slack Notification(EKS)') {
@@ -82,7 +79,7 @@ stage('Slack Notification(EKS)') {
 
 }
 }
-}
+
 
 
 // Email Notification
