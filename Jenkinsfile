@@ -6,12 +6,6 @@ pipeline {
 
 stages{
 
-stage('Slack Notification(Start)') {
-      steps {
-        slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
-
-}
-}
 
 stage('GIT CLONE') {
   steps {
@@ -21,14 +15,6 @@ stage('GIT CLONE') {
           }
   }
 
-
-stage('Slack Notification(test unit code and vulnerability)') {
-    steps {
-      slackSend message: 'Pipeline está no estagio de teste no codigo. O Processo será realiazado no Quality Gate, são teste de Sonar e Synk, ambos vão verificar "bugs e vulnerabilidade" em nosso codigo!'
-
-}
-}
- 
    
 stage('Synk-GateSonar-Security') {
             steps {		
@@ -39,7 +25,7 @@ stage('Synk-GateSonar-Security') {
   }
 
 ///DockerProcesso
-stage('Socker Build') { 
+stage('Docker Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
@@ -59,13 +45,6 @@ stage('Docker Push') {
             }
     	}
 
-stage('Slack Notification(Docker)') {
-    steps {
-      slackSend message: 'Processo de criar imagem de Release do frontend no Docker, foi efetuado com sucesso!'
-
-}
-}
-
 stage('Kubernetes Deployment') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
@@ -74,14 +53,6 @@ stage('Kubernetes Deployment') {
 		}
 	      }
    	}
-
-
-stage('Slack Notification(EKS)') {
-    steps {
-      slackSend message: 'Processo de Release do frontend e deploy no EKS, foi efetuado com sucesso!'
-
-}
-}
 
 }
 }
