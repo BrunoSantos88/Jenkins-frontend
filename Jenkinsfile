@@ -49,10 +49,14 @@ stage('Docker Push') {
 
      stage('Kubernetes Deployment') {
 	   steps {
+      withKubeConfig([credentialsId: 'kubelogin']) {
           script{
           sh 'kubectl apply -f deployment.yaml'
           }
   }
 }
+}
+
+
 }
 }
