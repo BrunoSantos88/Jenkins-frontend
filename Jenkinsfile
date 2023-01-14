@@ -1,10 +1,8 @@
 pipeline {
   agent any
   tools { 
-        maven 'Maven 3.6.3'  
+        maven 'Maven 3.5.2'  
     }
-
-
 
 stages{
 
@@ -19,7 +17,7 @@ stage('GIT CLONE') {
   steps {
                 // Get code from a GitHub repository
     git url: 'https://github.com/BrunoSantos88/Jenkins-frontend.git', branch: 'main',
-    credentialsId: 'jenkins-server_local'
+    credentialsId: 'jenkins-aws'
           }
   }
 
