@@ -1,38 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: asgbuggy-deployment
+  labels:
+    app: frontend
+  name: frontend
+namespace: devops
 spec:
-  replicas: 1
+  replicas: 15
   selector:
     matchLabels:
-      app: asgbuggy
+      app: frontend
   template:
     metadata:
       labels:
-        app: asgbuggy
+        app: frontend
     spec:
       containers:
-      - name: asgbuggy
-        image: brunosantos88/awsfrontend:6
-        imagePullPolicy: Always
+      - name: frontend
+        image: 555527584255.dkr.ecr.us-west-2.amazonaws.com/frontend
         ports:
-        - containerPort: 8080
-# service type loadbalancer       
+          - containerPort: 80
+            name: frontend
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: asgbuggy
-    k8s-app: asgbuggy
-  name: asgbuggy
+  name: frontend
 spec:
   ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 8080
+  - port: 80
+    targetPort: 80
   type: LoadBalancer
   selector:
-    app: asgbuggy
+    app: frontend

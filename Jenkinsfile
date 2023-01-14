@@ -69,6 +69,26 @@ stage('Slack Notification(Docker)') {
   }
 
 
+stage('Kubernetes Deployment') {
+	   steps {
+	      withKubeConfig([credentialsId: 'kubelogin']) {
+		  sh('kubectl create namespaces devops')
+		  sh ('kubectl apply -f deployment.yaml')
+		}
+	      }
+   	}
+
+
+stage('Slack Notification(EKS)') {
+    steps {
+      slackSend message: 'Processo de Release do frontend e deploy no EKS, foi efetuado com sucesso!'
+
+}
+}
+	    
+  }
+
+
 // Email Notification
 post {
         always {
