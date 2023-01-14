@@ -70,7 +70,6 @@ stage('Slack Notification(Docker)') {
 stage('Kubernetes Deployment') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh('kubectl create namespaces devops')
 		  sh ('kubectl apply -f deployment.yaml')
 		}
 	      }
@@ -84,4 +83,24 @@ stage('Slack Notification(EKS)') {
 }
 }
 }
+
+
+// Email Notification
+post {
+        always {
+            echo "Notifying build result by email"
+        }
+success {
+            mail to: 'infratidevops@gmail.com',
+                 subject: "SUCCESS: ${currentBuild.fullDisplayName}",
+                 body: "Pipeline passou, Efetou com Sucesso"
+
+        }
+failure {
+           mail to: 'infratidevops@gmail.com',
+                subject:"FAILURE: ${currentBuild.fullDisplayName}",
+                body: "Pipeline Falhou , verificar os parametros corretos!"
+
+        }
+      }
 }
