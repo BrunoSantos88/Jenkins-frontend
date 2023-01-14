@@ -51,6 +51,7 @@ stage('Docker Push') {
 	   steps {
       withKubeConfig([credentialsId: 'kubelogin']) {
           script{
+          sh 'kubectl create namespaces devsecops'
           sh 'kubectl apply -f deployment.yaml --namespace=devsecops'
           }
   }
