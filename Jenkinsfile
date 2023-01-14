@@ -51,7 +51,8 @@ stage('Docker Push') {
 	   steps {
       withKubeConfig([credentialsId: 'kubelogin']) {
           script{
-          sh 'kubectl apply -f deployment.yaml'
+          sh 'kubectl delete all --all -n devsecops'
+          sh 'kubectl apply -f deployment.yaml --namespace=devsecops'
           }
   }
 }
