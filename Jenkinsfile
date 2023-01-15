@@ -55,6 +55,7 @@ stage('Docker Push') {
           }
   }
 }
+     }
 
 stage ('wait_for_testing'){
 	   steps {
@@ -71,5 +72,4 @@ stage ('wait_for_testing'){
 	     }
        } 
   }
-}
 }
