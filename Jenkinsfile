@@ -22,12 +22,10 @@ stage('Synk-GateSonar-Security') {
 					sh 'mvn snyk:test -fn'
 				}
 			}
-  }
+}
 
 ///DockerProcesso
-
-///DockerProcesso
-stage('docker Build') { 
+stage('Docker Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
@@ -47,7 +45,7 @@ stage('Docker Push') {
             }
     	}
 
-     stage('Kubernetes Deployment') {
+stage('Kubernetes Deployment') {
 	   steps {
       withKubeConfig([credentialsId: 'kubelogin']) {
           script{
@@ -57,13 +55,13 @@ stage('Docker Push') {
 }
      }
 
-stage ('wait_for_testing'){
+stage ('ESPERAR O TESTE ONZAP FINALIZAR(180s)'){
 	   steps {
 		   sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
 	   	}
 	   }
 	   
-	stage('RunDASTUsingZAP') {
+	stage('TEST EM ONZAP EM ANDAMENTO') {
           steps {
 		    withKubeConfig([credentialsId: 'kubelogin']) {
 				sh('zap.sh -cmd -quickurl http://$(kubectl get services/asgbuggy --namespace=devsecops -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
