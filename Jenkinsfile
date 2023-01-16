@@ -4,8 +4,6 @@ pipeline {
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
   }
-  }
-
 
   tools { 
         ///depentencias 
@@ -61,5 +59,5 @@ stage('Synk-GateSonar-Security') {
       }
     }
   }
-
+}
 
