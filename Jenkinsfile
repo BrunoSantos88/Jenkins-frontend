@@ -1,10 +1,26 @@
 pipeline {
   agent any
+
   tools { 
-        maven 'Maven 3.5.2'  
+        ///depentencias 
+        maven 'Maven 3.6.3' 
+        terraform 'Terraform 1.3.7' 
+    }
+        environment {
+        //aws
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
 
-stages{
+// Stages.
+  stages {   
+
+    stage('Slack Notification(Start)') {
+      steps {
+        slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
+
+}
+}
 
 
 stage('GIT CLONE') {
@@ -29,7 +45,7 @@ stage('Docker Build') {
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
-                 app =  docker.build("frontend")
+                 app =  docker.build("frontend frontend/.")
                  }
                }
             }
@@ -38,36 +54,11 @@ stage('Docker Build') {
 stage('Docker Push') {
             steps {
                 script{
-                    docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
+                    docker.withRegistry('555527584255.dkr.ecr.us-east-1.amazonaws.com', 'ecr.us-east-1:aws-credentials') {
                     app.push("latest")
                     }
                 }
             }
     	}
-
-stage('Kubernetes Deployment') {
-	   steps {
-      withKubeConfig([credentialsId: 'kubelogin']) {
-          script{
-          sh 'kubectl apply -f deployment.yaml --namespace=devsecops'
-          }
-  }
-}
-     }
-
-stage ('ESPERAR O TESTE ONZAP FINALIZAR(180s)'){
-	   steps {
-		   sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
-	   	}
-	   }
-	   
-	stage('TEST EM ONZAP EM ANDAMENTO') {
-          steps {
-		    withKubeConfig([credentialsId: 'kubelogin']) {
-				sh('zap.sh -cmd -quickurl http://$(kubectl get services/asgbuggy --namespace=devsecops -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
-				archiveArtifacts artifacts: 'zap_report.html'
-		    }
-	     }
-       } 
   }
 }
