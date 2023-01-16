@@ -55,7 +55,7 @@ stage('Building image') {
       steps{
          script {
             docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("master")
+            dockerImage.push()
           }
         }
       }
