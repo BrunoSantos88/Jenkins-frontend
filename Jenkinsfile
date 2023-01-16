@@ -2,9 +2,8 @@ pipeline {
   agent any
 
   environment {
-    registry = "brunosantos88/brunosantos88/awsfrontend"
-    registryCredential = 'dockerlogin'
-    dockerImage = ''
+    DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
+  }
   }
 
 
@@ -44,23 +43,24 @@ stage('Synk-GateSonar-Security') {
 }
 
 ///DockerProcesso
-stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
+stages {
+    stage('Build') {
+      steps {
+        sh 'docker build -t brunosantos88/awsfrontend .'
       }
     }
-    stage('Deploy Image') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-   }
-}
 
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+   
+    stage('Push') {
+      steps {
+        sh 'docker push brunosantos88/awsfrontend'
+      }
+    }
+  }
+  }
 
