@@ -44,9 +44,9 @@ stage('Synk-GateSonar-Security') {
 stage('Docker Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
-                 dir('/frontend'){
+                 dir('frontend'){
                  script{
-                 app =  docker.build("frontend")
+                 app =  docker.build("frontend" , "-f ./frontend .")
                  }
                }
             }
