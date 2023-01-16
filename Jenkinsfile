@@ -43,7 +43,7 @@ stage('Synk-GateSonar-Security') {
 ///DockerProcesso
     stage('Docker Build') {
       steps {
-        sh 'docker build -t brunosantos88/awsfrontend .'
+        sh 'docker build -t brunosantos88/awsfrontend frontend/.'
       }
     }
 
