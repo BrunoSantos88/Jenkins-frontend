@@ -36,27 +36,27 @@ stage('Synk-GateSonar-Security') {
 }
 
 ///DockerProcesso
-stage('Docker build') {
-      steps{
-        script {
-          withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
-          app =  docker.build("frontend")
-
-        }
-      }
+stage('Build') { 
+            steps { 
+               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
+                 script{
+                 app =  docker.build("frontend")
+                 }
+               }
+            }
     }
-}
 
-  stage('Docker PUSH') {
-      steps{
-        script {
-          docker.withRegistry('555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials')
-          app.push("latest")
-        }
-      }
-    }
-   
+	stage('Push') {
+            steps {
+                script{
+                    docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
+                    app.push("latest")
+                    }
+                }
+            }
+    	}
   }
-}
+	    
+  }
 
 
