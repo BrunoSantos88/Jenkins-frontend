@@ -55,7 +55,7 @@ stage('Synk-GateSonar-Security') {
    
     stage('Docker Push') {
       steps {
-        sh 'docker push brunosantos88/awsfrontend:relese1'
+        sh 'docker push brunosantos88/awsfrontend:relese'
       }
     }
   }
