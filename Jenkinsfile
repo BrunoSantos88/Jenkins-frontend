@@ -57,6 +57,7 @@ stage('Docker build') {
   stage('Docker PUSH') {
       steps{
         script {
+          docker.withRegistry('555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials')
           sh 'docker push 555527584255.dkr.ecr.us-west-2.amazonaws.com/frontend:latest'
         }
       }
