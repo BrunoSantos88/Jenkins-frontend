@@ -43,24 +43,23 @@ stage('Synk-GateSonar-Security') {
 }
 
 ///DockerProcesso
-stages {
-    stage('Build') {
+    stage('Docker Build') {
       steps {
         sh 'docker build -t brunosantos88/awsfrontend .'
       }
     }
 
-    stage('Login') {
+    stage('Docker Login') {
       steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
    
-    stage('Push') {
+    stage('Docker Push') {
       steps {
         sh 'docker push brunosantos88/awsfrontend'
       }
     }
   }
-  }
+
 
