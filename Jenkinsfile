@@ -47,12 +47,6 @@ stage('Synk-GateSonar-Security') {
       }
     }
 
-    stage('Docker TAG') {
-      steps {
-        sh 'docker tag brunosantos88/awsfrontend:latest'
-      }
-    }
-
     stage('Docker Login') {
       steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
