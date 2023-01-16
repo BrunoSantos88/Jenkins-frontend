@@ -46,7 +46,7 @@ stage('Docker Build') {
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  dir('frontend'){
                  script{
-                 app =  docker.build("frontend" , "-f ./frontend .")
+                 app =  docker.build("frontend")
                  }
                }
             }
