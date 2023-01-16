@@ -1,13 +1,6 @@
 pipeline {
   agent any
 
-  environment {
-    imagename = "frontend"
-    ecrurl = "https://828556645578.dkr.ecr.us-east-2.amazonaws.com"
-    ecrcredentials = "ecr:us-west-2:aws-credentials"
-    dockerImage = ''
-  } 
-
   tools { 
         ///depentencias 
         maven 'Maven 3.6.3' 
@@ -43,29 +36,32 @@ stage('Synk-GateSonar-Security') {
 }
 
 ///DockerProcesso
-stage('Building image') {
+stage('Docker build') {
       steps{
         script {
-          dockerImage = docker.build imagename
+          sh 'docker build -t frontend .'
+        }
+      }
+    }
+
+
+    stage('Docker TAG') {
+      steps{
+        script {
+          sh 'docker tag frontend:latest 555527584255.dkr.ecr.us-west-2.amazonaws.com/frontend:latest'
+        }
+      }
+    }
+
+
+  stage('Docker PUSH') {
+      steps{
+        script {
+          sh 'docker push 555527584255.dkr.ecr.us-west-2.amazonaws.com/frontend:latest'
         }
       }
     }
    
-stage('Deploy Master Image') {
-   when {
-      anyOf {
-            branch 'main'
-      }
-     }
-      steps{
-        script {
-          docker.withRegistry(ecrurl, ecrcredentials) {     
-            dockerImage.push("$BUILD_NUMBER")
-             dockerImage.push('latest')
-
-          }
-        }
-      }
-    }
   }
 }
+
