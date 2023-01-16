@@ -6,11 +6,6 @@ pipeline {
         maven 'Maven 3.6.3' 
         terraform 'Terraform 1.3.7' 
     }
-        environment {
-        //aws
-        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-    }
 
 // Stages.
   stages {   
