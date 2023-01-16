@@ -1,11 +1,19 @@
 pipeline {
   agent any
 
+  environment {
+    registry = "brunosantos88/brunosantos88/awsfrontend"
+    registryCredential = 'dockerlogin'
+    dockerImage = ''
+  }
+
+
   tools { 
         ///depentencias 
         maven 'Maven 3.6.3' 
         terraform 'Terraform 1.3.7' 
     }
+
 
 // Stages.
   stages {   
@@ -36,27 +44,23 @@ stage('Synk-GateSonar-Security') {
 }
 
 ///DockerProcesso
-stage('Build') { 
-            steps { 
-               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
-                 script{
-                 app =  docker.build("frontend")
-                 }
-               }
-            }
+stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
     }
-
-	stage('Push') {
-            steps {
-                script{
-                    docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
-                    app.push("latest")
-                    }
-                }
-            }
-    	}
-  }
-	    
-  }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push("master")
+          }
+        }
+      }
+    }
+   }
+}
 
 
