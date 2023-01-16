@@ -45,7 +45,13 @@ stage('Synk-GateSonar-Security') {
 ///DockerProcesso
     stage('Docker Build') {
       steps {
-        sh 'docker build -t brunosantos88/awsfrontend frontend/. :${TAG}'
+        sh 'docker build -t brunosantos88/awsfrontend frontend/.'
+      }
+    }
+
+    stage('Docker TAG') {
+      steps {
+        sh 'docker build -t brunosantos88/awsfrontend:latest'
       }
     }
 
@@ -57,7 +63,7 @@ stage('Synk-GateSonar-Security') {
    
     stage('Docker Push') {
       steps {
-        sh 'docker push brunosantos88/awsfrontend:${TAG}").push("latest"'
+        sh 'docker push brunosantos88/awsfrontend:latest'
       }
     }
   }
