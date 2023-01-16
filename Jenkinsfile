@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
+    tag = sh(returnStdout: true, script: "git rev-parse -short=10 HEAD | tail -n +2")
   }
 
   tools { 
@@ -43,7 +44,7 @@ stage('Synk-GateSonar-Security') {
 ///DockerProcesso
     stage('Docker Build') {
       steps {
-        sh 'docker build -t brunosantos88/awsfrontend frontend/.'
+        sh 'docker build -t brunosantos88/awsfrontend frontend/:${var.tag} .'
       }
     }
 
@@ -55,7 +56,7 @@ stage('Synk-GateSonar-Security') {
    
     stage('Docker Push') {
       steps {
-        sh 'docker push brunosantos88/awsfrontend:renew'
+        sh 'docker push brunosantos88/awsfrontend:${var.tag} .'
       }
     }
   }
