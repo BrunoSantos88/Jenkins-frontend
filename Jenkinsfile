@@ -45,6 +45,7 @@ stage('Docker build') {
         }
       }
     }
+}
 
   stage('Docker PUSH') {
       steps{
@@ -57,5 +58,5 @@ stage('Docker build') {
    
   }
 }
-}
+
 
