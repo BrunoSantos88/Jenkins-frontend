@@ -49,7 +49,7 @@ stage('Synk-GateSonar-Security') {
 
     stage('Docker TAG') {
       steps {
-        sh 'docker build -t brunosantos88/awsfrontend:latest'
+        sh 'docker tag brunosantos88/awsfrontend:latest'
       }
     }
 
