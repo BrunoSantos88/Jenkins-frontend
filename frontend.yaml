@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: brunosantos88/awsfrontend
+        image: brunosantos88/awsfrontend:latest
         ports:
           - containerPort: 80
             name: frontend
