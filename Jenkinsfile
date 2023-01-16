@@ -2,6 +2,8 @@ pipeline {
   agent any
 
   environment {
+    DATE = new Date().format('yy.M')
+    TAG = "${DATE}.${BUILD_NUMBER}"
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
   }
 
@@ -43,7 +45,9 @@ stage('Synk-GateSonar-Security') {
 ///DockerProcesso
     stage('Docker Build') {
       steps {
-        sh 'docker build -t brunosantos88/awsfrontend frontend/.'
+        script {
+          docker.build("brunosantos88/awsfrontend frontend/:${TAG}")
+                }
       }
     }
 
@@ -55,9 +59,14 @@ stage('Synk-GateSonar-Security') {
    
     stage('Docker Push') {
       steps {
-        sh 'docker push brunosantos88/awsfrontend'
-      }
+        script {           
+      docker.image("brunosantos88/awsfrontend:${TAG}").push()
+      docker.image("brunosantos88/awsfrontend:${TAG}").push("latest")
+
     }
+  }
+}
+
   }
 }
 
