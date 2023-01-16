@@ -58,6 +58,17 @@ stage('Synk-GateSonar-Security') {
         sh 'docker push brunosantos88/awsfrontend:latest'
       }
     }
+
+
+    stage('Kubernetes Deployment Frontend') {
+	   steps {
+	      withKubeConfig([credentialsId: 'kubelogin']) {
+		  sh('kubectl delete all --all -n devsecops')
+		  sh ('kubectl apply -f frontend.yaml --namespace=developer')
+		}
+	      }
+   	}
+
   }
 }
-
+  
