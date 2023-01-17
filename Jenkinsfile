@@ -77,7 +77,4 @@ stage('Synk-GateSonar-Security') {
 	//  }
   //  } 
 
- }
-}
-
   
