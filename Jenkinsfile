@@ -49,7 +49,7 @@ stage('Synk-GateSonar-Security') {
    }
 
 
-   stage('Kubernetes Deployment of ASG Bugg Web Application') {
+   stage('Kubernetes Deployment') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
 		  sh ('kubectl apply -f frontend.yaml --namespace=devsecops')
