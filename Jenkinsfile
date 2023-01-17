@@ -30,23 +30,23 @@ stage('Synk-GateSonar-Security') {
   }
 
 ///DockerProcesso
-   // stage('Docker Build') {
-     // steps {
-     //   sh 'docker build -t brunosantos88/awsfrontend frontend/.'
-    //  }
-    //}
+   stage('Docker Build') {
+      steps {
+        sh 'docker build -t brunosantos88/awsfrontend frontend/.'
+     }
+    }
 
-   // stage('Docker Login') {
-    //  steps {
-     //   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-    //  }
-   // }
+   stage('Docker Login') {
+      steps {
+       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+     }
+    }
    
-   // stage('Docker Push') {
-    //  steps {
-     //   sh 'docker push brunosantos88/awsfrontend:latest'
-    //  }
-   // }
+   stage('Docker Push') {
+     steps {
+        sh 'docker push brunosantos88/awsfrontend:latest'
+     }
+   }
 
 
    // stage('Kubernetes Deployment Frontend') {
