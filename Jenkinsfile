@@ -52,7 +52,7 @@ stage('Synk-GateSonar-Security') {
    stage('Deployment-Frontend') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl apply -f frontend --namespace=developer')
+		  sh ('kubectl apply -f frontend.yaml --namespace=developer')
 		}
 	      }
    	}
