@@ -33,57 +33,57 @@ stage('Synk-GateSonar-Security') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:test -fn'
-				}
+			}
 			}
 }
 
 ///DockerProcesso
-    stage('Docker Build') {
-      steps {
-        sh 'docker build -t brunosantos88/awsfrontend frontend/.'
-      }
-    }
+   // stage('Docker Build') {
+     // steps {
+     //   sh 'docker build -t brunosantos88/awsfrontend frontend/.'
+    //  }
+    //}
 
-    stage('Docker Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
-    }
+   // stage('Docker Login') {
+    //  steps {
+     //   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+    //  }
+   // }
    
-    stage('Docker Push') {
-      steps {
-        sh 'docker push brunosantos88/awsfrontend:latest'
-      }
-    }
+   // stage('Docker Push') {
+    //  steps {
+     //   sh 'docker push brunosantos88/awsfrontend:latest'
+    //  }
+   // }
 
 
-    stage('Kubernetes Deployment Frontend') {
-	   steps {
-	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh('kubectl delete all --all -n developer')
-      sh ('kubectl create namespace developer')
-		  sh ('kubectl apply -f frontend.yaml --namespace=developer')
-		}
-	      }
-   	}
+   // stage('Kubernetes Deployment Frontend') {
+	  // steps {
+	  //    withKubeConfig([credentialsId: 'kubelogin']) {
+		//  sh('kubectl delete all --all -n developer')
+    //  sh ('kubectl create namespace developer')
+		//  sh ('kubectl apply -f frontend.yaml --namespace=developer')
+	//	}
+	 //     }
+   //	}
 
 
-    stage ('Aguardar 180s Instalar OWSZAP'){
-	   steps {
-		   sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
-	   	}
-	   }
+  //  stage ('Aguardar 180s Instalar OWSZAP'){
+	   //steps {
+		 //  sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
+	  // 	}
+	 // }
 	   
-stage('OWSZAP Frontend') {
-    steps {
-		withKubeConfig([credentialsId: 'kubelogin']) {
-		sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=developer -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
-	  archiveArtifacts artifacts: 'zap_report.html'
-		}
-	  }
-    } 
+///stage('OWSZAP Frontend') {
+  //  steps {
+	//	withKubeConfig([credentialsId: 'kubelogin']) {
+	//	sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=developer -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
+	//  archiveArtifacts artifacts: 'zap_report.html'
+	//	}
+	//  }
+  //  } 
 
-  }
+//  }
 }
 
   
