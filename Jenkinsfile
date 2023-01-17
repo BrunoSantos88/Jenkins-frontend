@@ -63,7 +63,8 @@ stage('Synk-GateSonar-Security') {
     stage('Kubernetes Deployment Frontend') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh('kubectl delete all --all -n devsecops')
+		  sh('kubectl delete all --all -n developer')
+      sh ('kubectl create namespace developer')
 		  sh ('kubectl apply -f frontend.yaml --namespace=developer')
 		}
 	      }
