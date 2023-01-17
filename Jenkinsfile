@@ -10,6 +10,8 @@ pipeline {
         maven 'Maven 3.5.2' 
     }
 
+stages {   
+
 stage('GIT CLONE') {
   steps {
                 // Get code from a GitHub repository
@@ -18,13 +20,13 @@ stage('GIT CLONE') {
           }
   }
 
-stages{
-    stage('SonarCloud-GateCode-Quality') {
-            steps {	
+
+
+stage('SonarCloud-GateCode-Quality') {
+  steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=53605ca03976b7b9426745604501d6d6914fc92a'
 			}
         } 
-}
 
    
 stage('Synk-GateSonar-Security') {
@@ -82,5 +84,6 @@ stage('OWSZAP Frontend') {
     } 
 
   }
+}
 
   
