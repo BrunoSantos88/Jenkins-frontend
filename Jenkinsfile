@@ -52,10 +52,14 @@ stage('Synk-GateSonar-Security') {
    stage('Kubernetes Deployment') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl apply -f frontend.yaml --namespace=devsecops')
+		  sh('kubectl delete all --all -n developer')
+		  sh ('kubectl apply -f deployment.yaml --namespace=developer')
 		}
 	      }
    	}
+
+  }
+}
 
 
   //  stage ('Aguardar 180s Instalar OWSZAP'){
