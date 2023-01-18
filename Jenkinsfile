@@ -57,13 +57,13 @@ stage('Synk-GateSonar-Security') {
 	      }
    	}
 
-   stage ('Aguardar 180s Instalar OWSZAP'){
+   stage ('AGUARDAR 180s INSTALAÇÂO OWSZAP'){
 	  steps {
 		  sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
 	 	}
 	  }
 	   
-stage('OWSZAP Backend') {
+stage('OWSZAP PROXI FRONTEND') {
     steps {
 		withKubeConfig([credentialsId: 'kubelogin']) {
 		sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=devsecops -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
