@@ -27,4 +27,4 @@ Desafio 1: Frontend esta rodando no EKS com deployment do Jenkins e com todos os
 repositorio usando raiz. Link https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git
 
 <img align="left" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213302242-4ceca27c-48d7-4e38-9c45-9c666dfcd060.png" />
-<img align="center" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213302553-c8d3c14d-5a1b-4e21-ba4c-443f62bcae21.png" /> <img align="left" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213307224-c9377151-c823-4643-bf80-36d09848089f.png" />
+<img align="center" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213302553-c8d3c14d-5a1b-4e21-ba4c-443f62bcae21.png" /> <img align="right" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213307224-c9377151-c823-4643-bf80-36d09848089f.png" />
