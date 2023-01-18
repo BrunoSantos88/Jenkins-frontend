@@ -23,7 +23,7 @@ BootLab DevOps na Nuvem com AWS, usando os serviços AWS: EC2, ECR, EKS e VPC , 
 Docker: dockerfile, Build e Push para o serviço ECR(AWS).
 
 ______________________________________________________________________________________________________________________________________________
-Desafio 1: Subir jenkins para aws. nesse caso, usei um jenkins na minha maquina local
+Desafio 1: Frontend esta rodando no EKS com deployment do Jenkins e com todos os teste DAST e SAST.
 repositorio usando raiz. Link https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git
 
 <img align="left" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213302242-4ceca27c-48d7-4e38-9c45-9c666dfcd060.png" />
