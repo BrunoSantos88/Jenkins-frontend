@@ -51,7 +51,8 @@ stage('Synk-GateSonar-Security') {
 
    stage('Kubernetes Frontend') {
 	   steps {
-	      withKubeConfig([credentialsId: 'kubelogin']) {
+	      withKubeConfig([credentialsId: 'minikubelogin']) {
+      sh ('kubectl create namespace devsecops')
 		  sh ('kubectl apply -f frontend.yaml --namespace=devsecops')
 		}
 	      }
