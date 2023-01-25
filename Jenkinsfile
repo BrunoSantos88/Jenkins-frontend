@@ -23,12 +23,11 @@ stage('GIT CLONE') {
   }
 
   stage('SonarQube Analysis') {
-    def mvn = tool 'Default Maven';
+    def scannerHome = tool 'SonarScanner';
     withSonarQubeEnv() {
-      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend"
+      sh "${scannerHome}/bin/sonar-scanner"
     }
   }
-
 
 stage('Synk-GateSonar-Security') {
             steps {		
