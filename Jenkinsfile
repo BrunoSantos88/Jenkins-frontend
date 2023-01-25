@@ -3,6 +3,8 @@ pipeline {
 
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
+    scannerhome= tool 'SonarQubeScanner'
+
   }
 
   tools { 
@@ -20,18 +22,13 @@ stage('GIT CLONE') {
           }
   }
 
- stage('SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'npm install'
-                }
-            }
-        }
-        stage("Quality gate") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
+  stage('SonarQube Analysis') {
+    def mvn = tool 'Default Maven';
+    withSonarQubeEnv() {
+      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend"
+    }
+  }
+
 
 stage('Synk-GateSonar-Security') {
             steps {		
