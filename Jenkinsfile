@@ -23,7 +23,7 @@ stage('GIT CLONE') {
  stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
+                    sh 'npm install'
                 }
             }
         }
