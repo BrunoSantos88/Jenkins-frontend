@@ -20,12 +20,15 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('SonarQube') {
-            steps {
-                sh "mvn sonar:sonar -Dsonar.login=squ_a22615b1dd3988155da48cd5f2b69831987f659d"
-            }
-        }
+  stage('SonarQube analysis') {
+            steps{
+                withSonarQubeEnv('SonarQube-Server'){
+                    sh "mvn clean package"
+                    sh "mvn sonar:sonar -Dsonar.projectKey=DeveloperFrontend -Dsonar.host.url=http://3.238.149.127:9000/ -Dsonar.login=squ_a22615b1dd3988155da48cd5f2b69831987f659d"
 
+                }
+            }
+  }
 
 stage('Synk-GateSonar-Security') {
             steps {		
