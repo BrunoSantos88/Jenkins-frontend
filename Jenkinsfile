@@ -3,8 +3,6 @@ pipeline {
 
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
-    scannerhome= tool 'SonarQubeScanner'
-
   }
 
   tools { 
