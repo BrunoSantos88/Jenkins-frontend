@@ -20,11 +20,12 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('SonarQube Analysis') {
-      steps {
-      sh 'mvn /bin/mvn clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend'
-    }
-  }
+  stage('SonarQube') {
+            steps {
+                sh "mvn sonar:sonar -Dsonar.login=squ_a22615b1dd3988155da48cd5f2b69831987f659d"
+            }
+        }
+
 
 stage('Synk-GateSonar-Security') {
             steps {		
