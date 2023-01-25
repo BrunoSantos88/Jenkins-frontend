@@ -52,8 +52,8 @@ stage('Synk-GateSonar-Security') {
    stage('Kubernetes Frontend') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-      sh ('kubectl create namespace devsecops')
-		  sh ('kubectl apply -f frontend.yaml --namespace=devsecops')
+      sh ('kubectl create namespace developer')
+		  sh ('kubectl apply -f frontend.yaml --namespace=developer')
 		}
 	      }
    	}
@@ -67,7 +67,7 @@ stage('Synk-GateSonar-Security') {
 stage('OWSZAP PROXI FRONTEND') {
     steps {
 		withKubeConfig([credentialsId: 'kubelogin']) {
-		sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=devsecops -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
+		sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=developer-o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
 	  archiveArtifacts artifacts: 'zap_report.html'
 	}
 	  }
