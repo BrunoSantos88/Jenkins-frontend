@@ -1,26 +1,12 @@
 pipeline {
-
-    agent {
-        docker {
-            image 'node'
-            args '-u root'
-        }
-    }
-
+    agent { docker { image 'node:16.17.1-alpine' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                echo 'Building...'
+                sh 'node --version'
                 sh 'npm install'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                sh 'npm test'
-            }
-        }
-
 
   stage('GIT CLONE') {
   steps {
@@ -32,7 +18,6 @@ pipeline {
     
   stage('SonarAnalysis') {
         steps {	
-        sh "npm install"
 		sh 'sonar:sonar \
   -Dsonar.projectKey=DeveloperFrontend \
   -Dsonar.host.url=http://3.238.149.127:9000 \
