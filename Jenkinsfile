@@ -21,7 +21,6 @@ stage('GIT CLONE') {
           }
   }
 
-  stages{
     stage('SonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar \
@@ -38,7 +37,6 @@ stage('snyk dependency scan') {
     }
   
     }
-}
 }
 
   
