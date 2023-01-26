@@ -1,6 +1,9 @@
 pipeline {
   agent {
-    dockerfile true
+    dockerfile {
+      customWorkspace '/test'
+      filename 'Dockerfile'
+    }
   }
   stages {
     stage('Compile static assets') {
@@ -14,4 +17,3 @@ pipeline {
     }
   }
 }
- 
