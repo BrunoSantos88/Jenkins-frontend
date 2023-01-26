@@ -15,12 +15,29 @@ stage('GIT CLONE') {
           }
   }
 
-stage ('Build docker image') { //here you can check how you can build even docker images inside container
-        agent {
-            docker {
-                image 'maven:latest'
-            }
+
+pipeline {
+   agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
         }
+    }
+
+    stage('GIT CLONE') {
+  steps {
+                // Get code from a GitHub repository
+    git url: 'https://github.com/BrunoSantos88/Jenkins-frontend.git', branch: 'main',
+    credentialsId: 'jenkins-aws'
+          }
+  }
+
+          stage ("build") {
+              steps {
+                sh 'mvn clean package jib:dockerBuild verify'
+              }
+        }
+    }
 }
 
   stage('Synk-GateSonar-Security') {
@@ -32,4 +49,3 @@ stage ('Build docker image') { //here you can check how you can build even docke
   }
 
     }
-}
