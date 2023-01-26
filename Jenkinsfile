@@ -1,11 +1,6 @@
 pipeline {
   agent any
   
-
-  environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
-  }
-
   tools { 
         ///depentencias 
         maven 'Maven 3.5.2' 
