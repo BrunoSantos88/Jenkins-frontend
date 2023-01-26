@@ -26,14 +26,11 @@ stage('snyk dependency scan') {
         sh 'mvn snyk:test -fn'
       }
     }
-
-  stages{
-    stage('CompileandRunSonarAnalysis') {
+stage('CompileandRunSonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=brunosantos881388 -Dsonar.organization=asgbuggywebapp -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=988c643e8219cd60fdebf4e8fbf30e4326edeb81'
 			}
     }
   
     }
-}
 }
