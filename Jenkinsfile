@@ -20,15 +20,19 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('SonarQube analysis') {
-            steps{
-                withSonarQubeEnv('SonarQube-Server'){
-                    sh "mvn clean package"
-                    sh "mvn sonar:sonar -Dsonar.projectKey=DeveloperFrontend -Dsonar.host.url=http://3.238.149.127:9000/ -Dsonar.login=squ_a22615b1dd3988155da48cd5f2b69831987f659d"
-
-                }
-            }
-  }
+  stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
 
 stage('Synk-GateSonar-Security') {
             steps {		
