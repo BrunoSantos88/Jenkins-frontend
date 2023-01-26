@@ -1,16 +1,3 @@
-node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    def mvn = tool 'Maven 3.6.3';
-    withSonarQubeEnv() {
-      sh "${mvn}/usr/share/maven clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend"
-    }
-  }
-}
-
-
 pipeline {
   agent any
 
@@ -31,6 +18,15 @@ stage('GIT CLONE') {
     git url: 'https://github.com/BrunoSantos88/Jenkins-frontend.git', branch: 'main',
     credentialsId: 'jenkins-aws'
           }
+  }
+
+  stage('SonarQube Analysis') {
+    step {
+      sh "${mvn}/usr/share/maven mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=DeveloperFrontend \
+  -Dsonar.host.url=http://3.238.149.127:9000 \
+  -Dsonar.login=sqp_6d2b3325ebdeb23c964211b9629b6f9f1c6a8f66"
+    }
   }
 
 stage('Synk-GateSonar-Security') {
