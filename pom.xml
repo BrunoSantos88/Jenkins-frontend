@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	
-	</properties>
 
-	<profiles>
-		<profile>
-			<id>JDK8-Switch</id>
-			<activation>
-				<jdk>1.8</jdk>
-			</activation>
-			<properties>
-				<jvm.args.perm.size>-XX:MaxMetaspaceSize=128m</jvm.args.perm.size>
-				<jvm.args.gc.log.path>-Xloggc:logs/gc_%p_%t.log</jvm.args.gc.log.path>
-			</properties>
+</properties>
 		</profile>
 		<profile>
 			<id>JDK11-Switch</id>
