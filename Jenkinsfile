@@ -33,9 +33,7 @@ stage('Synk-GateSonar-Security') {
 stage('build && SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                {
                 sh 'mvn clean package sonar:sonar'
-                }
                 }
             }
         }
