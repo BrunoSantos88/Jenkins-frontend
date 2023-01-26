@@ -1,36 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@BrunoSantos88 
-SonarQubeCommunity
-/
-sonar-maven-report
-Public
-Fork your own copy of SonarQubeCommunity/sonar-maven-report
-Code
-Issues
-2
-Pull requests
-2
-Actions
-Projects
-Security
-Insights
-sonar-maven-report/pom.xml
-@JeneJasper
-JeneJasper Info about error: Could not find or load main class org.apache.maven.…
-…
-Latest commit 9c0db9d on Nov 28, 2018
- History
- 6 contributors
-@JeneJasper@simonbrandhof@Godin@ehartmann@gaudol@christophelevis
-713 lines (641 sloc)  26.6 KB
-
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
