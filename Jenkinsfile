@@ -1,11 +1,15 @@
 pipeline {
     agent { docker { image 'node:6.3' } }
+    agent { docker { image 'maven:3-alpine'}}
+
+
     stages {
         stage('Node Agent') {
             steps {
                 sh 'npm install'
             }
         }
+        
 
 stage('GIT CLONE') {
   steps {
@@ -14,15 +18,5 @@ stage('GIT CLONE') {
     credentialsId: 'jenkins-aws'
           }
   }
-
-
-stage ('Maven') {
-   agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
-}
     }
 }
