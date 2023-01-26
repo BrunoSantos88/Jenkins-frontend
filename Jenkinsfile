@@ -6,5 +6,13 @@ pipeline {
                 sh 'mvn --version'
             }
         }
+
+ stage('Checkout code') {
+        steps {
+            checkout scm
+        }
+    }
+
+    
     }
 }
