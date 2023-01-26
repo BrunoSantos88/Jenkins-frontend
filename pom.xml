@@ -3,14 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.t246osslab.easybuggy</groupId>
-	<artifactId>easybuggy</artifactId>
+	<groupId>org.t246osslab.frontend</groupId>
+	<artifactId>frontend</artifactId>
 	<version>1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<easybuggy-port>8080</easybuggy-port>
+		<frontend-port>80</frontend-port>
 		<!-- default properties (JDK 1.7 or earlier) -->
 		<jvm.args.perm.size>-XX:MaxPermSize=128m</jvm.args.perm.size>
 		<jvm.args.gc.log.path>-Xloggc:logs/gc.log</jvm.args.gc.log.path>
