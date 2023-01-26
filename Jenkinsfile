@@ -20,8 +20,7 @@ stage('GIT CLONE') {
           }
   }
 
-  stages{
-    stage('CompileandRunSonarAnalysis') {
+    stage('SonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=58de857afff27d95c16d759d1134e1f912bd51fb'
 			}
