@@ -1,13 +1,12 @@
 pipeline {
   agent any
- 
-  tools {nodejs 'node'}
- 
-  stages {
-    stage('Example') {
-      steps {
-        sh 'npm config ls'
-      }
-    }
-  }
 }
+ 
+   stage("install pip dependencies") {
+      agent { 
+        docker {
+           label "docker" 
+            image "python:3.7"
+           }
+           }
+   }
