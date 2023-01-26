@@ -22,12 +22,8 @@ stage('GIT CLONE') {
 
   stage('Sonarqube') {
     steps {
-        withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
+      sh "mvn clean verify sonar:sonar  -Dsonar.projectKey=DeveloperFrontend -Dsonar.sources=admin -Dsonar.host.url=http://3.238.149.127:9000 -Dsonar.login=admin -Dsonar.password=squ_42f0ad155f0231737cec705e22fb405e1756f939"
+     
     }
 }
 
