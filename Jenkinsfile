@@ -1,33 +1,28 @@
 pipeline {
-    agent { docker { image 'node:6.3' } }
-
-    stages {
-
-stage('GIT CLONE') {
-  steps {
-                // Get code from a GitHub repository
-    git url: 'https://github.com/BrunoSantos88/Jenkins-frontend.git', branch: 'main',
-    credentialsId: 'jenkins-aws'
-          }
-  }
-
+  agent none
   stages {
     stage('snyk dependency scan') {
-      tools {
-        snyk 'snyk-latest'
+      agent {
+        docker {
+          image 'snyk/snyk-cli:python-3'
+        }
+      }
+      environment {
+        SNYK_TOKEN = credentials('SNYK_TOKEN')
       }	
       steps {
-        snykSecurity(
-          organisation: 'Jenkins-frontend',
-          severity: 'high',
-          snykInstallation: 'snyk-latest',
-          snykTokenId: 'snyk',
-          failOnIssues: 'true'
-        )		
+        sh """
+          pip install -r requirements.txt
+          snyk auth ${SNYK_TOKEN}
+          snyk test --json \
+            --severity-threshold=high \
+            --file=requirements.txt \
+            --org=cloudbees \
+            --project-name=project-python
+        """		
       }
     }
-}
-}
+  }
 }
 
 
