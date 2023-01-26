@@ -1,7 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.8-alpine3.15'
+    agent { docker { image 'node:6.3' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'npm --version'
+            }
         }
     }
 }
