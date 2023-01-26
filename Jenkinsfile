@@ -2,13 +2,8 @@ pipeline {
   agent { label 'linux' }
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
+    
   }
-}
-
-
-pipeline {
-  agent any
-
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
   }
