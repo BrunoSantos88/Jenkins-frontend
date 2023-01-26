@@ -21,7 +21,7 @@ stage('GIT CLONE') {
   }
 
 stage('SonarQube Analysis') {
-    withSonarQubeEnv() {
+      steps {	
       sh "${mvn}/usr/share/maven clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend"
     }
   }
