@@ -1,17 +1,15 @@
 pipeline {
-    agent { docker { image 'node:16.17.1-alpine' } }
-
-
-stages {
-    
-
-stage('node install') {
+    agent none
+    stages {
+        stage('Back-end') {
+            agent {
+                docker { image 'maven:3.8.7-eclipse-temurin-11' }
+            }
             steps {
-                sh 'npm install'
+                sh 'mvn --version'
             }
         }
-    }
-}
-
 
   
+    }
+}
