@@ -1,13 +1,28 @@
 pipeline {
-    agent { docker { image 'node:16.17.1-alpine' } }
+
+    agent {
+        docker {
+            image 'node'
+            args '-u root'
+        }
+    }
+
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'node --version'
+                echo 'Building...'
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'npm test'
             }
         }
 
-    stage('GIT CLONE') {
+
+  stage('GIT CLONE') {
   steps {
                 // Get code from a GitHub repository
     git url: 'https://github.com/BrunoSantos88/Jenkins-frontend.git', branch: 'main',
