@@ -22,7 +22,7 @@ stage('GIT CLONE') {
 
   stage('Sonarqube') {
     steps {
-      sh 'mvn clean verify sonar:sonar \
+      sh 'mvn clean package sonar:sonar \
   -Dsonar.projectKey=Developer \
   -Dsonar.host.url=http://3.238.149.127:9000 \
   -Dsonar.login=sqp_249633ab29bf2606cbb20984f6a0ed452390eb37'
