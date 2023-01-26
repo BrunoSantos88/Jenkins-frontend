@@ -7,12 +7,6 @@ pipeline externa {
                 sh 'mvn --version'
             }
         }
-    }
- stage('Checkout code') {
-        steps {
-            checkout scm
-        }
-    }
 
     stage('SonarAnalysis') {
             steps {	
@@ -21,4 +15,5 @@ pipeline externa {
     }
 }
 
+}
   
