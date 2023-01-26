@@ -21,9 +21,8 @@ stage('GIT CLONE') {
   }
 
 stage('SonarQube Analysis') {
-    def mvn = tool 'Default Maven';
     withSonarQubeEnv() {
-      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend"
+      sh "${mvn}/usr/share/maven clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend"
     }
   }
 
