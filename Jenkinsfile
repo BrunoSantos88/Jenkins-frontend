@@ -19,16 +19,7 @@ stage('GIT CLONE') {
     credentialsId: 'jenkins-aws'
           }
   }
-
-
-    stage('CompileandRunSonarAnalysis') {
-            steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos1388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=0324c332ba26dcd0bdd1e7d0f858a8d2e1c29686'
-			}
-    }
-
-
-   
+ 
 stage('Synk-GateSonar-Security') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
