@@ -3,7 +3,7 @@ pipeline {
   
   tools { 
         ///depentencias 
-        maven 'Maven 3.6.3' 
+        maven 'Maven 3.5.2' 
     }
 
 stages {   
