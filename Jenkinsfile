@@ -33,7 +33,10 @@ stage('Synk-GateSonar-Security') {
 stage('build && SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                sh 'mvn clean package sonar:sonar'
+                sh 'mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=DveloperFrontend \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=sqp_6f5da24a804dcd6e51601e83ee3993fc8d67a3ea'
                 }
             }
         }
