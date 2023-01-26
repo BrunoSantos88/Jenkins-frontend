@@ -21,7 +21,7 @@ stage('GIT CLONE') {
   }
 
   stage('SonarQube Analysis') {
-    step {
+    steps {
       sh "mvn clean verify sonar:sonar \
   -Dsonar.projectKey=DeveloperFrontend \
   -Dsonar.host.url=http://3.238.149.127:9000 \
@@ -30,7 +30,7 @@ stage('GIT CLONE') {
   }
 
 stage('Synk-GateSonar-Security') {
-            steps {		
+        steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:test -fn'
 				}
