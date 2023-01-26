@@ -19,9 +19,9 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:https://github.com/mojohaus/sonar-maven-plugin.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/mojohaus/sonar-maven-plugin.git</developerConnection>
-    <url>https://github.com/mojohaus/sonar-maven-plugin</url>
+    <connection>scm:git:https://github.com/BrunoSantos88/Jenkins-frontend.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/BrunoSantos88/Jenkins-frontend.git</developerConnection>
+    <url>https://https://github.com/BrunoSantos88/Jenkins-frontend.git</url>
     <tag>HEAD</tag>
   </scm>
 
