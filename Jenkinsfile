@@ -8,7 +8,7 @@ pipeline {
 
   tools { 
         ///depentencias 
-        maven 'Maven 3.6.3' 
+        maven 'Maven 3.5.2' 
     }
 
 stages {   
@@ -21,20 +21,11 @@ stage('GIT CLONE') {
           }
   }
  
-stage('Synk-GateSonar-Security') {
-            steps {		
-				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
+stage('CompileandRunSonarAnalysis') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos1388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=599b56c3dd40d5744bef783dbdd4d4f8bdc87e0c'
 			}
-  }
-		stage('SonarQube analysis') {
-		steps {
-		sh 'mvn clean package sonar:sonar \
-  -Dsonar.projectKey=DveloperFrontend \
-  -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=sqp_6f5da24a804dcd6e51601e83ee3993fc8d67a3ea'
-			}
-		}
+    }
+	
 }
 }
