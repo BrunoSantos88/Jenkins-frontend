@@ -21,19 +21,19 @@ stage('GIT CLONE') {
           }
   }
 
-    stage('SonarAnalysis') {
+stage('snyk dependency scan') {
+      steps {
+        sh 'mvn snyk:test -fn'
+      }
+    }
+
+  stage('SonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar \
   -Dsonar.projectKey=DeveloperFrontend \
   -Dsonar.host.url=http://54.224.29.178:9000 \
   -Dsonar.login=sqp_81bece67cc962f88f1650bfccfe775b3c79362b2'
 			}
-    }
-
-stage('snyk dependency scan') {
-      steps {
-        sh 'mvn snyk:test -fn'
-      }
     }
   
     }
