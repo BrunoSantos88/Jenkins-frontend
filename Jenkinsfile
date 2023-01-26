@@ -1,5 +1,12 @@
 pipeline {
     agent { docker { image 'maven:3.8.7-eclipse-temurin-11' } }
+
+    tools { 
+        ///depentencias 
+        maven 'Maven 3.6.3' 
+
+    }
+
     stages {
         stage('build') {
             steps {
