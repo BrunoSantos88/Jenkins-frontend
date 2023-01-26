@@ -20,14 +20,12 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('SonarQube Analysis') {
-    steps {
-      sh "mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=DeveloperFrontend \
-  -Dsonar.host.url=http://3.238.149.127:9000 \
-  -Dsonar.login=sqp_6d2b3325ebdeb23c964211b9629b6f9f1c6a8f66"
+  stages{
+    stage('CompileandRunSonarAnalysis') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=58de857afff27d95c16d759d1134e1f912bd51fb'
+			}
     }
-  }
 
 stage('Synk-GateSonar-Security') {
         steps {		
