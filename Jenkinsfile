@@ -1,28 +1,17 @@
 pipeline {
-  agent any
-  
-  tools { 
-        ///depentencias 
-        maven 'Maven 3.5.2' 
+  agent {
+    dockerfile true
+  }
+  stages {
+    stage('Compile static assets') {
+      steps {
+        sh 'node --version'
+        sh 'npm --version'
+        sh 'pwd'
+        sh 'ls'
+        sh 'npm run build'
+      }
     }
-
-
-   stage("install pip dependencies") {
-      agent { 
-        docker {
-           label "docker" 
-            image "python:3.7"
-           }
-           }
-   }
-
-
-stage('Clone repository') { 
-steps { 
-script{
-checkout scm
+  }
 }
-}
-}
-
-}
+ 
