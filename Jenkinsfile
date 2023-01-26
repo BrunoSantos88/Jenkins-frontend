@@ -15,6 +15,14 @@ stage('GIT CLONE') {
           }
   }
 
+stage ('Build docker image') { //here you can check how you can build even docker images inside container
+        agent {
+            docker {
+                image 'maven:latest'
+            }
+        }
+}
+
   stage('Synk-GateSonar-Security') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
