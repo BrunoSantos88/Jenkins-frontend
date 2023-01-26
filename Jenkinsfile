@@ -1,10 +1,41 @@
-pipeline {
-  agent { docker { image 'maven:3.8.7-eclipse-temurin-11' } }
+pipeline externa {
+    agent { docker { image 'maven:3.8.7-eclipse-temurin-11' } }
+
+    stages {
+        stage('Maven') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
+    }
+
+  stage('GIT CLONE') {
+  steps {
+                // Get code from a GitHub repository
+    git url: 'https://github.com/BrunoSantos88/Jenkins-frontend.git', branch: 'main',
+    credentialsId: 'jenkins-aws'
+          }
+  }
+
+    stage('SonarAnalysis') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Jenkins-frontend -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=58de857afff27d95c16d759d1134e1f912bd51fb'
+			}
+    }
+  }
+
+pipeline local {
+  agent any
 
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
   }
- 
+
+  tools { 
+        ///depentencias 
+        maven 'Maven 3.6.3' 
+    }
+
 stages {   
 
 stage('GIT CLONE') {
@@ -14,7 +45,6 @@ stage('GIT CLONE') {
     credentialsId: 'jenkins-aws'
           }
   }
-
 
 stage('Synk-GateSonar-Security') {
         steps {		
