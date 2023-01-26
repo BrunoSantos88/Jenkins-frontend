@@ -1,9 +1,7 @@
 pipeline {
-  agent { label 'linux' }
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-    
-  }
+  agent any
+  
+
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
   }
@@ -31,49 +29,6 @@ stage('Synk-GateSonar-Security') {
 			}
   }
 
-///DockerProcesso
-   stage('Docker Build') {
-      steps {
-        sh 'docker build -t brunosantos88/awsfrontend frontend/.'
-     }
-    }
-
-   stage('Docker Login') {
-      steps {
-       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-     }
-    }
-   
-   stage('Docker Push') {
-     steps {
-        sh 'docker push brunosantos88/awsfrontend:latest'
-     }
-   }
-
-
-   stage('Kubernetes Frontend') {
-	   steps {
-	      withKubeConfig([credentialsId: 'kubelogin']) {
-      sh ('kubectl create namespace devsecops')
-		  sh ('kubectl apply -f frontend.yaml --namespace=devsecops')
-		}
-	      }
-   	}
-
-   stage ('AGUARDAR 180s INSTALAÇÂO OWSZAP'){
-	  steps {
-		  sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
-	 	}
-	  }
-	   
-stage('OWSZAP PROXI FRONTEND') {
-    steps {
-		withKubeConfig([credentialsId: 'kubelogin']) {
-		sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=devsecops -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
-	  archiveArtifacts artifacts: 'zap_report.html'
-	}
-	  }
-    } 
-
 }
+
 }
