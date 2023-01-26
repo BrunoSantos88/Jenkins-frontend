@@ -1,21 +1,7 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent { docker { image 'node:6.3' } }
+
     stages {
-        stage('Build') { 
-            steps {
-                sh 'mvn -B -DskipTests clean package' 
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
 
 stage('GIT CLONE') {
   steps {
@@ -25,13 +11,20 @@ stage('GIT CLONE') {
           }
   }
 
-stage('Synk-GateSonar-Security') {
-            steps {		
-				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
-			}
-}
-
+  stage('install'){
+        sh 'npm install' // Dependency Installation stage
+    }
+    stage('Scan') {
+        snykSecurity organisation: 'prashant.b', projectName: 'nodejs_demo_snyk', severity: 'medium', snykInstallation: 'Snyk', snykTokenId: '87cd2da3-ccfa-46f7-b7d4-d115b400422c', targetFile: 'package.json'
+    }
+    stage('Build') {
+        echo "Build"
+    }
+    stage('Results') {
+        echo "Test Result"
     }
 }
+}
+
+
+  
