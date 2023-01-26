@@ -20,12 +20,6 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('SonarQube Analysis') {
-     steps {
-      sh "${mvn}/usr/share/maven clean verify sonar:sonar -Dsonar.projectKey=DeveloperFrontend"
-    }
-  }
-
 stage('Synk-GateSonar-Security') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
