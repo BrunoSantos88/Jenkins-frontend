@@ -180,7 +180,7 @@
 
   <profiles>
     <profile>
-      <id>documents</id>
+      <id>frontend</id>
 
       <build>
         <plugins>
@@ -667,47 +667,4 @@
           </reportSet>
         </reportSets>
       </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>${mavenProjectInfoReportsPluginVersion}</version>
-        <configuration>
-          <dependencyDetailsEnabled>${dependency.details.enabled}</dependencyDetailsEnabled>
-          <dependencyLocationsEnabled>${dependency.locations.enabled}</dependencyLocationsEnabled>
-          <linkOnly>${licenseLinkOnly}</linkOnly>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>index</report>
-              <report>summary</report>
-              <report>license</report>
-              <report>project-team</report>
-              <report>modules</report>
-              <report>scm</report>
-              <report>issue-tracking</report>
-              <report>cim</report>
-              <report>distribution-management</report>
-              <report>dependency-info</report>
-              <report>dependencies</report>
-              <report>dependency-management</report>
-              <report>dependency-convergence</report>
-              <report>plugins</report>
-              <report>plugin-management</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-
-      <plugin>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>sonarqube-maven-report</artifactId>
-        <version>${mavenSonarReportPluginVersion}</version>
-        <configuration>
-          <sonarHostURL>${sonarCloudHost}</sonarHostURL>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
 </project>
