@@ -1,15 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('SonarQube analysis') {
-      tools {
-        sonarQube 'SonarQube Scanner 2.8'
-      }
-      steps {
-        withSonarQubeEnv('SonarQube Scanner') {
-          sh 'sonar-scanner'
-        }
-      }
+    stage("Build") {
+    docker.image('maven:3.6.1-jdk-11-slim').inside('-v $HOME:/var/maven -e MAVEN_CONFIG=/var/maven/.m2'){
+        sh "mvn -Duser.home=/var/maven -Dmaven.test.failure.ignore=true clean package"
+    }
     }
   }
 }
