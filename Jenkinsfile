@@ -27,16 +27,13 @@ stage('snyk dependency scan') {
       }
     }
 
-  stage('SonarAnalysis') {
+  stages{
+    stage('CompileandRunSonarAnalysis') {
             steps {	
-		sh 'mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=DeveloperFrontend \
-  -Dsonar.host.url=http://54.224.29.178:9000 \
-  -Dsonar.login=sqp_81bece67cc962f88f1650bfccfe775b3c79362b2'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=brunosantos881388 -Dsonar.organization=asgbuggywebapp -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=988c643e8219cd60fdebf4e8fbf30e4326edeb81'
 			}
     }
   
     }
 }
-
-  
+}
