@@ -17,15 +17,15 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('CompileandRunSonarAnalysis') {
+stage('CompileandRunSonarAnalysis') {
     steps {	
-		sh 'sonar-scanner \
+		sh 'sonar:sonar \
   -Dsonar.projectKey=DeveloperFrontend \
-  -Dsonar.sources=. \
   -Dsonar.host.url=http://54.224.29.178:9000 \
   -Dsonar.login=sqp_81bece67cc962f88f1650bfccfe775b3c79362b2'
 			}
     }
+
 
 stage('snyk dependency scan') {
       agent {
